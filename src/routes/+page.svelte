@@ -32,7 +32,7 @@
   let K: number = 0.5;
 
   const voltageSources = [
-    { name: "Vgs", value: 0, color: "bg-amber-500", min: Vp - 1, max: 7 },
+    { name: "Vgs", value: 0, color: "bg-pink-500", min: Vp - 1, max: 7 },
     { name: "Vds", value: 0, color: "bg-green-500", min: 0, max: 25 },
   ];
 
