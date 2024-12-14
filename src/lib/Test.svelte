@@ -1,64 +1,61 @@
 <script>
-// @ts-nocheck
-
     export let VGS = 0; // Tensão de gate-source (VGS)
-    let channelHeight = 0;
-    let electronPositions = []; // Posições dos elétrons
-    let holePositions = []; // Posições das lacunas
+    let channelHeight = 0; // Altura do canal
+    let channelText = ''; // Texto para representar os elétrons e lacunas
+    let currentFlow = 0; // Representa o "fluxo de corrente" (0 a 1)
+    let flowAnimationDuration = 0; // Duração da animação da corrente (em segundos)
   
-    // Função para calcular o aumento do canal com base em VGS
+    const plus =
+    "https://raw.githubusercontent.com/AulaZero/icons/refs/heads/main/icons/plus.svg";
+
+
+    // Função para gerar o fundo de texto e a animação de corrente
     $: {
+      // Atualiza o tamanho do canal com base em VGS
       if (VGS >= 0) {
-        // O canal cresce para baixo com base em VGS
-        channelHeight = Math.min(50 + VGS * 10, 300);
-        electronPositions = []; // Em VGS positivo, o canal é preenchido com elétrons
-        holePositions = [];
-        for (let i = 0; i < Math.floor(channelHeight / 10); i++) {
-          // Simula a distribuição dos elétrons no canal (de forma uniforme)
-          electronPositions.push(10 + i * 10);
-        }
+        channelHeight = Math.min(50 + VGS * 10, 300); // A altura do canal com base em VGS positivo
+        channelText = '-'.repeat(Math.floor(channelHeight / 10)); // Elétrons no canal
+        // A corrente aumenta com a tensão positiva
+        currentFlow = Math.min(Math.abs(VGS) / 10, 1); // Corrente proporcional a VGS positivo
+        // A duração da animação é inversamente proporcional a VGS (quanto maior VGS, mais rápida a animação)
+        flowAnimationDuration = Math.max(1, 5 - Math.abs(VGS)); // Limita a duração da animação
       } else {
-        // Quando VGS for negativo, o canal diminui (efeito de depleção)
-        channelHeight = 0;
-        electronPositions = [];
-        holePositions = [];
-        // Simula a depleção, onde lacunas aparecem
-        for (let i = 0; i < Math.floor(300 * (Math.abs(VGS) / 10)); i++) {
-          holePositions.push(10 + i * 10); // Lacunas aparecem com base no valor de VGS negativo
-        }
+        channelHeight = 0; // Canal depletado quando VGS é negativo
+        channelText = '+'.repeat(Math.floor(300 * (Math.abs(VGS) / 10))); // Lacunas
+        // A corrente diminui com VGS negativo
+        currentFlow = Math.max(0, 1 - Math.abs(VGS) / 10); // Corrente diminui com VGS negativo
+        // Quando VGS é negativo, a animação fica mais lenta
+        flowAnimationDuration = Math.max(1, 5 - Math.abs(VGS));
       }
     }
   </script>
   
   <div class="w-16 bg-gray-300 rounded-lg overflow-hidden relative">
-    <!-- Canal -->
+    <!-- Canal: Um fundo de texto representando os elétrons e lacunas -->
     <div
-      class="bg-green-500 transition-all duration-500 ease-out"
-      style="height: {channelHeight}px"
+      class="text-xs font-mono whitespace-nowrap"
+      style="height: {channelHeight}px; line-height: 1.2em; font-family: monospace;"
+    >
+      {channelText}
+    </div>
+  
+    <!-- Animação da corrente -->
+    <div
+      class="absolute bg-blue-500 bg-[url({plus})]  bg-[length:12px_14px]"
+      style="
+        bottom: 0;
+        left: 0;
+        width: 5px; /* Aumentei a largura para tornar mais visível */
+        height: {channelHeight}px;
+        animation: currentFlowAnimation {flowAnimationDuration}s infinite linear;
+      "
     ></div>
-  
-    <!-- Elétrons (representados por círculos) -->
-    {#each electronPositions as pos}
-      <div
-        class="absolute w-2 h-2 bg-blue-500 rounded-full"
-        style="bottom: {pos}px; left: 50%; transform: translateX(-50%)"
-      ></div>
-    {/each}
-  
-    <!-- Lacunas (representadas por círculos vazios ou de outra cor) -->
-    {#each holePositions as pos}
-      <div
-        class="absolute w-2 h-2 border-2 border-red-500 rounded-full"
-        style="bottom: {pos}px; left: 50%; transform: translateX(-50%)"
-      ></div>
-    {/each}
-  </div>
-
-  <div class="w-16 bg-gray-300 rounded-lg overflow-hidden">
-	<div
-	  class="transition-all duration-500 ease-out"
-	  style="height: {channelHeight}px; background-color: {VGS >= 0 ? 'green' : 'red'}"
-	></div>
   </div>
   
+  <style>
+    @keyframes currentFlowAnimation {
+      0% { transform: translateX(-100%); } /* Começa fora da tela, à esquerda */
+      100% { transform: translateX(100%); } /* Move até fora da tela, à direita */
+    }
+  </style>
   
