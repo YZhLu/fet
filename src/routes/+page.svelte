@@ -8,6 +8,13 @@
   import { AppBar, AppShell, RangeSlider } from "@skeletonlabs/skeleton";
   import Channel from "$lib/Channel.svelte";
   import Values from "$lib/Values.svelte";
+  import Cover from "$lib/Cover.svelte";
+  import Gate from "$lib/Gate.svelte";
+  import BottomWire from "$lib/BottomWire.svelte";
+  import RightWire from "$lib/RightWire.svelte";
+  import LeftWire from "$lib/LeftWire.svelte";
+  import VerticalTopWire from "$lib/VerticalTopWire.svelte";
+  import TopWire from "$lib/TopWire.svelte";
 
   const nChannelColor = "bg-blue-500";
   const pChannelColor = "bg-rose-500";
@@ -78,145 +85,48 @@
 
     <!-- <Animation trens={$trainsStore} /> -->
     <div class="flex items-center justify-center bg-purple-100 p-3 py-14">
-      <div class="bg-purple-200 h-[364px] flex items-center pl-2">
-        <div class="bg-amber-500 h-[244px] w-4 mt-10 overflow-hidden">
-          <div
-            class="w-full h-full animate-current-up bg-[url({plus})] bg-[length:12px_14px]"
-            style="animation-duration: 700ms;"
-          ></div>
-        </div>
-      </div>
+      <LeftWire chargeUrl={plus} />
+
       <div
         class="flex flex-col items-center justify-center bg-purple-200 py-10 w-80"
       >
-        <div class="flex w-80 h-14 items-end">
-          <!-- <div
-            class="bg-amber-500 w-[168px] h-4 flex justify-center items-center pl-9"
-          > -->
-          <div
-            class="bg-amber-500 w-[168px] h-4 flex justify-center items-center overflow-hidden"
-          >
-            <div
-              class="w-[90%] h-full animate-current-right-prime bg-[url({plus})] bg-[length:12px_14px]"
-              style="animation-duration: 500ms;"
-            ></div>
-            <!-- <img
-              {src}
-              alt="?"
-              class="h-14 transform"
-              class:-rotate-90={voltageSources[0].value < 0}
-              class:rotate-90={voltageSources[0].value >= 0}
-            /> -->
-          </div>
-          <div class="w-[96px] h-4"></div>
-          <div class="bg-amber-500 w-14 h-4">
-            <div
-              class="w-full h-full animate-current-right bg-[url({plus})] bg-[length:12px_14px]"
-              style="animation-duration: 500ms;"
-            ></div>
-          </div>
-        </div>
+        <TopWire chargeUrl={plus} />
+        <VerticalTopWire chargeUrl={plus} />
 
-        <div class="flex justify-around w-80">
-          <div class="bg-amber-500 w-4 h-8">
-            <div
-              class="w-full h-[120%] animate-current-down bg-[url({plus})] bg-[length:12px_14px]"
-              style="animation-duration: 300ms;"
-            ></div>
-          </div>
-          <div class=" w-12 h-3 flex justify-center">
-            <div class="bg-amber-500 w-4 h-8"></div>
-          </div>
-          <div class="bg-amber-500 w-4 h-8">
-            <div
-              class="w-full h-[130%] animate-current-up bg-[url({plus})] bg-[length:12px_14px]"
-              style="animation-duration: 500ms;"
-            ></div>
-          </div>
-        </div>
-        <div class="flex justify-around w-80">
-          <div class="bg-amber-500 w-4 h-3"></div>
-          {#if voltageSources[0].value > 0}
-            <div
-              class="bg-gray-500 w-12 h-3 bg-[url({plus})] bg-[length:12px_14px]"
-            ></div>
-          {:else}
-            <div class="bg-gray-500 w-12 h-3"></div>
-          {/if}
-          <!-- <div class="bg-gray-500 w-12 h-3 bg-[url({plus})]  bg-[length:12px_14px]"></div> -->
-          <div class="bg-amber-500 w-4 h-3"></div>
-        </div>
+        <Gate bind:Vgs={voltageSources[0].value} chargeUrl={plus} />
+        <Cover />
 
-        <div class="flex">
-          <div class="bg-gray-400 w-3 h-3"></div>
-          <div class="bg-gray-500 w-10 h-3"></div>
-          <div class="bg-gray-400 w-[184px] h-3"></div>
-          <div class="bg-gray-500 w-10 h-3"></div>
-          <div class="bg-gray-400 w-3 h-3"></div>
-        </div>
         <div
-          class="flex justify-center {pChannelColor} w-64 md:w-72 h-28 rounded-b-lg"
+          class="flex justify-center flex-col {pChannelColor} w-64 md:w-72 h-28 rounded-b-lg"
         >
           <div
-            class="{nChannelColor} w-12 h-14 flex justify-center items-center"
+            class="flex justify-center {pChannelColor} w-64 md:w-72 h-28 rounded-b-lg"
           >
-            N
+            <div
+              class="{nChannelColor} w-12 h-14 flex justify-center items-center"
+            >
+              N
+            </div>
+            <Channel
+              channelColor={nChannelColor}
+              substrateColor={pChannelColor}
+              bind:Vgs={voltageSources[0].value}
+              {vp}
+              vmax={voltageSources[0].max}
+            />
+            <div
+              class="{nChannelColor} w-12 h-14 flex justify-center items-center"
+            >
+              N
+            </div>
           </div>
-          <Channel
-            channelColor={nChannelColor}
-            substrateColor={pChannelColor}
-            bind:Vgs={voltageSources[0].value}
-            {vp}
-            vmax={voltageSources[0].max}
-          />
-          <div
-            class="{nChannelColor} w-12 h-14 flex justify-center items-center"
-          >
-            N
-          </div>
-        </div>
-        <div class="bg-gray-500 w-20 h-3"></div>
-        <div class="bg-amber-500 w-4 h-8"></div>
-        <div
-          class="bg-amber-500 w-80 h-4 flex justify-end items-center overflow-hidden"
-        >
-          <div
-            class="w-full h-full animate-current-left bg-[url({plus})] bg-[length:12px_14px]"
-            style="animation-duration: 500ms;"
-          ></div>
-          <!-- <img {src} alt="?" class="w-14 h-14 transform -rotate-90 mr-7" /> -->
+          <span class="flex justify-center pb-2">P</span>
         </div>
 
-        <!-- {voltageSources[0].value} -->
-        <!-- VGS: {VGS} || vp: {vp}|| Id: {Id} || k: {K} || Vds: {voltageSources[1].value} || VGS _ vp: {VGS < vp} -->
+        <BottomWire chargeUrl={plus} />
       </div>
-      <!-- <div class="h-[300px] w-14 mt-10 flex flex-col justify-between">
-        <div class=" flex justify-start items-center mt-2">
-          <img {src} alt="?" class="w-14 h-14  transform -rotate-90 mr-2" />
-        </div>
-        <div class="w-14 h-4 bg-amber-500 mb-7"></div>
-      </div>
-	  <div class="h-[244px] w-2 mt-10 flex flex-col justify-between">
-        <div class="w-4 h-4 bg-amber-500"></div>
-		<div class="w-4 h-4 bg-amber-500"></div>
-      </div>
-      <div class="bg-amber-500 h-[244px] w-4 mt-10"></div> -->
-      <div class="bg-purple-200 h-[364px] flex items-center pr-2">
-        <div class="bg-amber-500 h-[244px] w-4 mt-10 relative overflow-hidden">
-          <div
-            class="absolute bottom-0 w-full h-full animate-current-down bg-[url({plus})] bg-[length:12px_14px]"
-            style="animation-duration: 500ms;"
-          >
-            <!-- <div class=" w-full h-full bg-amber-300"></div>
-            <div class="w-full h-full bg-purple-400"></div>
-            <div class="w-full h-full bg-amber-600"></div> -->
-          </div>
-        </div>
-      </div>
+      <RightWire chargeUrl={plus} />
     </div>
-    <!-- <div class="card">
-      {voltageSources[1].value}
-    </div> -->
 
     <div
       class="flex flex-col md:flex-row justify-center items-center gap-2 p-2 border"
@@ -242,89 +152,3 @@
     </div>
   </main>
 </AppShell>
-
-<style>
-  @keyframes current-flow-up {
-    0% {
-      transform: translateY(10%);
-    }
-    100% {
-      transform: translateY(-10%);
-    }
-  }
-
-  @keyframes current-flow-down {
-    0% {
-      transform: translateY(0%);
-    }
-    100% {
-      transform: translateY(10%);
-    }
-  }
-
-  @keyframes current-flow-left {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-5%);
-    }
-  }
-
-  @keyframes current-flow-right {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(10%);
-    }
-  }
-
-  @keyframes current-flow-right-prime {
-    0% {
-      transform: translateX(-90%);
-    }
-    100% {
-      transform: translateX(-70%);
-    }
-  }
-  .animate-current-up {
-    animation: current-flow-up 0ms linear infinite;
-    /* position: absolute;
-    bottom: 0; */
-    /* width: 100%;
-    height: 100%; */
-  }
-
-  .animate-current-down {
-    animation: current-flow-down 0ms linear infinite;
-    /* position: absolute;
-    bottom: 0; */
-    /* width: 100%;
-    height: 100%; */
-  }
-
-  .animate-current-left {
-    animation: current-flow-left 0ms linear infinite;
-    /* position: absolute;
-    bottom: 0; */
-    /* width: 100%;
-    height: 100%; */
-  }
-
-  .animate-current-right {
-    animation: current-flow-right 0ms linear infinite;
-    /* position: absolute; */
-    /* bottom: 0; */
-    /* width: 100%;
-    height: 100%; */
-  }
-
-  .animate-current-right-prime {
-    animation: current-flow-right-prime 0ms linear infinite;
-    /* position: absolute; */
-    /* bottom: 0; */
-    /* width: 100%;
-    height: 100%; */
-  }
-</style>

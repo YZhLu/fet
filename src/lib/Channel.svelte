@@ -12,7 +12,7 @@
 
   export let vp = -5;
   export let vmax = vp;
-  export let classes = " h-20 md:w-44 w-44"; //w-32";
+  export let classes = "h-20 md:w-44 w-44"; //w-32";
   export let channelColor = "bg-green-500";
   export let substrateColor = "bg-rose-500";
   let substrateText = "";
