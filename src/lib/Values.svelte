@@ -5,6 +5,7 @@
   export let Vth: number; //= 1; // Tensão de limiar (exemplo, pode ajustar conforme o MOSFET)
   export let K: number; //= 0.5; // Constante do MOSFET (exemplo, pode ajustar conforme o MOSFET)
   export let Vgs_prime: number;
+  let Iss = 10
 
   // Função para calcular a corrente Id com base nas tensões Vgs e Vds
   function calcularId() {
@@ -13,7 +14,8 @@
     } else {
       if (Vds < Vgs - Vth) {
         // Modo linear (ou triode)
-        Id = K * ((Vgs - Vth) * Vds - Vds ** 2 / 2);
+        //Id = K * ((Vgs - Vth) * Vds - Vds ** 2 / 2);
+        Id = Iss * (1 - (Vgs/Vth))**2
       } else {
         // Modo de saturação
         Id = (K / 2) * (Vgs - Vth) ** 2;
