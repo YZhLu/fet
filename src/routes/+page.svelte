@@ -37,7 +37,7 @@
   // let Vgs: number;
   // let Vds: number;
   let Vds_max: number = 9;
-  let Vgs_max: number = 3;
+  let Vgs_max: number = 6;
 
   const voltageSources = [
     { name: "Vgs", value: 0, color: "bg-pink-500", min: Vp - 1, max: Vgs_max },

@@ -31,6 +31,7 @@
     Vds: number,
     Vp: number
   ): number {
+    if (Vgs < Vp) return 0;
     // Calcula Idss de acordo com a fórmula fornecida
     const Idss = Iss * (1 - Vgs / Vp) ** 2;
 
