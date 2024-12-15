@@ -1,19 +1,33 @@
 <script lang="ts">
-  import Chart from "$lib/Chart.svelte";
-  import Graph from "$lib/Graph.svelte"; // Importe o componente do gráfico
-  import Vds from "$lib/VDS.svelte";
+  import { Vp } from "$lib/data";
+  import Graphs from "$lib/Graphs.svelte";
+  import { AppBar, LightSwitch } from "@skeletonlabs/skeleton";
+
+  let Iss: number = 7;
+  let span: number = 2;
+
+  let Vds_max: number = 9;
+  let Vgs_max: number = 6;
 </script>
 
-<div class="overflow-auto flex w-full h-full flex-col md:flex-row">
-  <main class="p-3 bg-gray-100 h-full w-full md:w-1/2">
-    <Graph />
-    <!-- Inclua o componente do gráfico -->
-  </main>
-  <main class="p-3 bg-gray-50 h-full w-full md:w-1/2">
-    <Vds />
-    <!-- Inclua o componente do gráfico -->
-  </main>
-  <!-- <div class="p-6 bg-gray-100 w-1/3">
-    <Chart></Chart>
-  </div> -->
+<AppBar background="bg-violet-700">
+  <svelte:fragment slot="lead">
+    <strong class="text-xl uppercase">FET Simulation </strong>
+    <a href="/" class="btn" data-sveltekit-preload-data="hover">MOSFET</a>
+    <a href="/jfet" class="btn" data-sveltekit-preload-data="hover">JFET</a>
+    <a href="/chart" class="btn" data-sveltekit-preload-data="hover">Charts</a>
+  </svelte:fragment>
+  <svelte:fragment slot="trail">
+    <!-- <button class="btn btn-sm variant-ghost-surface" on:click={start}>
+      Start
+    </button> -->
+    <!-- <button class="btn btn-sm variant-ghost-surface" on:click={stop}> Stop </button> -->
+    <LightSwitch></LightSwitch>
+    <!-- <button class="btn btn-sm variant-ghost-surface" on:click={reloadPage}>
+      Reset
+    </button> -->
+  </svelte:fragment>
+</AppBar>
+<div class="p-2 pb-0 bg-purple-100">
+  <Graphs {Vp} {Iss} {Vds_max} {Vgs_max} {span}></Graphs>
 </div>

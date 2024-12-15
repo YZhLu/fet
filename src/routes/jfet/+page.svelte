@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { trainsStore, startTrains, updateTrainSpeed, stopTrains, sizeStore } from '$lib/train';
 	import { AppBar, AppShell, RangeSlider } from '@skeletonlabs/skeleton';
@@ -36,7 +36,7 @@
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<button class="btn btn-sm variant-ghost-surface" on:click={start}> Start </button>
-				<!-- <button class="btn btn-sm variant-ghost-surface" on:click={stop}> Stop </button> -->
+				<! -- <button class="btn btn-sm variant-ghost-surface" on:click={stop}> Stop </button> -- >
 				<LightSwitch></LightSwitch>
 				<button class="btn btn-sm variant-ghost-surface" on:click={reloadPage}> Reset </button>
 			</svelte:fragment>
@@ -65,4 +65,6 @@
 			{/each}
 		</div>
 	</main>
-</AppShell>
+</AppShell> -->
+
+NOT Yet

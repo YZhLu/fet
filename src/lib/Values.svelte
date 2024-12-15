@@ -49,7 +49,7 @@
   $: {
     Vds;
     Vgs;
-    console.log(Vds, Vgs);
+    //console.log(Vds, Vgs);
     //calcularId()
     Id = calculateId(Iss, Vgs, Vds, Vp);
   }

@@ -79,18 +79,20 @@
       <svelte:fragment slot="lead">
         <strong class="text-xl uppercase">FET Simulation </strong>
         <a href="/" class="btn" data-sveltekit-preload-data="hover">MOSFET</a>
-        <a href="/turbo" class="btn" data-sveltekit-preload-data="hover">JFET</a
-        >
+        <a href="/jfet" class="btn" data-sveltekit-preload-data="hover">JFET</a>
+        <a href="/chart" class="btn" data-sveltekit-preload-data="hover">
+          Charts
+        </a>
       </svelte:fragment>
       <svelte:fragment slot="trail">
-        <button class="btn btn-sm variant-ghost-surface" on:click={start}>
+        <!-- <button class="btn btn-sm variant-ghost-surface" on:click={start}>
           Start
-        </button>
+        </button> -->
         <!-- <button class="btn btn-sm variant-ghost-surface" on:click={stop}> Stop </button> -->
         <LightSwitch></LightSwitch>
-        <button class="btn btn-sm variant-ghost-surface" on:click={reloadPage}>
+        <!-- <button class="btn btn-sm variant-ghost-surface" on:click={reloadPage}>
           Reset
-        </button>
+        </button> -->
       </svelte:fragment>
     </AppBar>
   </svelte:fragment>
@@ -107,7 +109,7 @@
     <div class="p-2 pb-0 bg-purple-100">
       <Graphs {Vp} {Iss} {Vds_max} {Vgs_max} {span}></Graphs>
     </div>
-   
+
     <!-- <Animation trens={$trainsStore} /> -->
     <div class="flex items-center justify-center bg-purple-100 p-3 py-1">
       <LeftWire {isOn} {speed} />
