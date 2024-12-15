@@ -15,6 +15,7 @@
   import LeftWire from "$lib/LeftWire.svelte";
   import VerticalTopWire from "$lib/VerticalTopWire.svelte";
   import TopWire from "$lib/TopWire.svelte";
+  import Graphs from "$lib/Graphs.svelte";
 
   const nChannelColor = "bg-blue-500";
   const pChannelColor = "bg-rose-500";
@@ -27,13 +28,26 @@
   let isOn: boolean = true;
   let speed: number = 0.1;
 
+  let span: number = 2;
+
   let Vp = -4;
   let Id: number = 1;
+  let Iss: number = 7;
   let K: number = 0.5;
+  // let Vgs: number;
+  // let Vds: number;
+  let Vds_max: number = 9;
+  let Vgs_max: number = 3;
 
   const voltageSources = [
-    { name: "Vgs", value: 0, color: "bg-pink-500", min: Vp - 1, max: 7 },
-    { name: "Vds", value: 0, color: "bg-green-500", min: 0, max: 25 },
+    { name: "Vgs", value: 0, color: "bg-pink-500", min: Vp - 1, max: Vgs_max },
+    {
+      name: "Vds",
+      value: 0,
+      color: "bg-green-500",
+      min: 0,
+      max: Vds_max + span - Vp - 1,
+    },
   ];
 
   function handleVoltageChange(event: Event, trainNumber: string) {
@@ -82,19 +96,24 @@
   </svelte:fragment>
   <main class="h-screen w-screen overflow-auto border bg-gray-100">
     <Values
-      Vgs={voltageSources[0].value}
+      bind:Vgs={voltageSources[0].value}
       bind:Id
       {K}
+      {Iss}
       Vds={voltageSources[1].value}
       Vth={Vp}
       Vgs_prime={voltageSources[0].max}
     ></Values>
+    <div>
+      <Graphs {Vp} {Iss} {Vds_max} {Vgs_max} {span}></Graphs>
+    </div>
+   
     <!-- <Animation trens={$trainsStore} /> -->
-    <div class="flex items-center justify-center bg-purple-100 p-3 py-14">
+    <div class="flex items-center justify-center bg-purple-100 p-3 py-1">
       <LeftWire {isOn} {speed} />
 
       <div
-        class="flex flex-col items-center justify-center bg-purple-200 py-10 w-80"
+        class="flex flex-col items-center justify-center bg-purple-100 py-10 w-80"
       >
         <TopWire {isOn} Vgs={voltageSources[0].value} {speed} />
         <VerticalTopWire {isOn} {speed} />
@@ -144,7 +163,7 @@
           <RangeSlider
             name="range-slider"
             bind:value={vs.value}
-            max={vs.max + 2}
+            max={vs.max}
             {step}
             min={vs.min}
             ticked
@@ -152,7 +171,7 @@
           >
             <div class="flex justify-between items-center">
               <div class="font-bold">{vs.name}</div>
-              <div class="text-xs">{vs.value}</div>
+              <div class="text-xs">{vs.value} V</div>
             </div>
           </RangeSlider>
         </div>

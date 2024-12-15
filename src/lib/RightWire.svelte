@@ -5,7 +5,7 @@
   let base: number = 1100;
 </script>
 
-<div class="bg-purple-200 h-[364px] flex items-center pr-2">
+<div class="bg-purple-100 h-[364px] flex items-center pr-2">
   <div class=" h-[244px] w-4 mt-10">
     <div class="size-4 {bgColor}"></div>
     <div class="{bgColor} h-[212px] w-4 overflow-hidden">

@@ -5,21 +5,42 @@
   export let Vth: number; //= 1; // Tensão de limiar (exemplo, pode ajustar conforme o MOSFET)
   export let K: number; //= 0.5; // Constante do MOSFET (exemplo, pode ajustar conforme o MOSFET)
   export let Vgs_prime: number;
-  let Iss = 10
+  export let Iss: number;
+  export let Vp: number = Vth;
 
   // Função para calcular a corrente Id com base nas tensões Vgs e Vds
-  function calcularId() {
-    if (Vgs < Vth) {
-      Id = 0; // Se Vgs for menor que Vth, o MOSFET está "desligado"
+  // function calcularId() {
+  //   console.log(Vgs, Id, Vds, Vgs < Vth);
+  //   if (Vgs < Vth || Vds == 0) {
+  //     Id = 0; // Se Vgs for menor que Vth, o MOSFET está "desligado"
+  //   } else {
+  //     if (Vds < Vgs - Vth) {
+  //       // Modo linear (ou triode)
+  //       //Id = K * ((Vgs - Vth) * Vds - Vds ** 2 / 2);
+  //       Id = Iss * (1 - Vgs / Vth) ** 2;
+  //     } else {
+  //       // Modo de saturação
+  //       Id = (K / 2) * (Vgs - Vth) ** 2;
+  //     }
+  //   }
+  // }
+
+  export function calculateId(
+    Iss: number,
+    Vgs: number,
+    Vds: number,
+    Vp: number
+  ): number {
+    // Calcula Idss de acordo com a fórmula fornecida
+    const Idss = Iss * (1 - Vgs / Vp) ** 2;
+
+    // Verifica a condição para Id
+    if (Vds >= Vgs - Vp) {
+      // Quando Vds é maior ou igual a Vgs - Vp, Id é igual a Idss
+      return Idss;
     } else {
-      if (Vds < Vgs - Vth) {
-        // Modo linear (ou triode)
-        //Id = K * ((Vgs - Vth) * Vds - Vds ** 2 / 2);
-        Id = Iss * (1 - (Vgs/Vth))**2
-      } else {
-        // Modo de saturação
-        Id = (K / 2) * (Vgs - Vth) ** 2;
-      }
+      // Caso contrário, usa a fórmula alternativa para Id
+      return (Idss / (Vgs - Vp)) * Vds;
     }
   }
 
@@ -27,18 +48,20 @@
   $: {
     Vds;
     Vgs;
-    calcularId();
+    console.log(Vds, Vgs);
+    //calcularId()
+    Id = calculateId(Iss, Vgs, Vds, Vp);
   }
 </script>
 
-<main class="flex flex-col items-center p-8 space-y-6 card">
+<main class="flex flex-col items-center p-8 space-y-0 card">
   <h1 class="text-2xl font-semibold">
     Cálculo da Corrente Id em MOSFET de Depleção
   </h1>
   <!-- {Vds < Vgs - Vth} {Vgs - Vth} -->
   <!-- Inputs para Vgs e Vds -->
-  <div class="flex flex-col items-center space-y-4">
-    <div>
+  <div class="flex flex-col items-center space-y-0">
+    <!-- <div>
       <label for="vgs-slider" class="text-lg">Vgs': {Vgs_prime} V</label>
     </div>
 
@@ -56,10 +79,11 @@
     <div>
       <label for="Vds-slider" class="text-lg">K: {K.toFixed(2)} V</label>
     </div>
-  </div>
+  </div> -->
 
-  <!-- Exibição da Corrente Id -->
-  <div class="mt-6">
-    <p class="text-xl">Corrente Id: {Id.toFixed(4)} mA</p>
+    <!-- Exibição da Corrente Id -->
+    <div class="mt-6">
+      <p class="text-xl">Corrente Id: {Id.toFixed(4)} mA</p>
+    </div>
   </div>
 </main>

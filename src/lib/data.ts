@@ -1,28 +1,25 @@
 const Iss = 7;
-const Ids = [0];
-for (let i = 1; i < 15; i++) {
-  Ids[i] = Iss * (1 - (i-5) / -4) ** 2;
-  console.log(Ids)
+export const Vp = -4;
+export const Ids = [0, 0];
+
+export const shift = Vp - 2;
+const max = 10;
+
+for (let i = 2; i < max; i++) {
+  Ids[i] = Iss * (1 - (i + shift) / Vp) ** 2;
+  console.log(i - shift);
 }
 
+for (let i = 2; i < max; i++) {
+  Ids[i] = Iss * (1 - (i + shift) / Vp) ** 2;
+  //console.log(i - shift);
+}
+
+
+const labels = Ids.map((_, i) => i + shift);
+console.log(Ids);
 export const data = {
-  labels: [
-    "-5",
-    "-4",
-    "-3",
-    "-2",
-    "-1",
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-  ],
+  labels,
   datasets: [
     {
       label: "Vgs x Id",
@@ -43,11 +40,7 @@ export const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      // data: [
-      //   0, 0, 0.625, 2.5, 5.625, 10, 16.625, 22.5, 30.625, 40, 50.625, 62.5,
-      //   75.625, 90, 105.625,
-      // ],
-      data:Ids
+      data: Ids,
     },
     // {
     //   label: "My Second dataset",

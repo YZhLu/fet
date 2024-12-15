@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/tela/+page.svelte";
+export { default as component } from "../../../../src/routes/jfet/+page.svelte";
