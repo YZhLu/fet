@@ -1,6 +1,5 @@
 <script lang="ts">
   export let Vgs: number;
-  export let chargeUrl: string;
 </script>
 
 <div class="flex justify-around w-80">

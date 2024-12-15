@@ -55,7 +55,7 @@
 
   $: {
     isOn = Id > 0;
-    speed = 4/Id
+    speed = 4 / Id;
   }
 </script>
 
@@ -83,7 +83,7 @@
   <main class="h-screen w-screen overflow-auto border bg-gray-100">
     <Values
       Vgs={voltageSources[0].value}
-      bind:Id={Id}
+      bind:Id
       {K}
       Vds={voltageSources[1].value}
       Vth={Vp}
@@ -99,7 +99,7 @@
         <TopWire {isOn} Vgs={voltageSources[0].value} {speed} />
         <VerticalTopWire {isOn} {speed} />
 
-        <Gate bind:Vgs={voltageSources[0].value} {chargeUrl} />
+        <Gate bind:Vgs={voltageSources[0].value} />
         <Cover />
 
         <div
