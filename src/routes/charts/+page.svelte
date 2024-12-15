@@ -15,7 +15,7 @@
     <strong class="text-xl uppercase">FET Simulation </strong>
     <a href="/" class="btn" data-sveltekit-preload-data="hover">MOSFET</a>
     <a href="/jfet" class="btn" data-sveltekit-preload-data="hover">JFET</a>
-    <a href="/chart" class="btn" data-sveltekit-preload-data="hover">Charts</a>
+    <a href="/charts" class="btn" data-sveltekit-preload-data="hover">Charts</a>
   </svelte:fragment>
   <svelte:fragment slot="trail">
     <!-- <button class="btn btn-sm variant-ghost-surface" on:click={start}>

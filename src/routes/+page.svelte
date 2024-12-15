@@ -80,7 +80,7 @@
         <strong class="text-xl uppercase">FET Simulation </strong>
         <a href="/" class="btn" data-sveltekit-preload-data="hover">MOSFET</a>
         <a href="/jfet" class="btn" data-sveltekit-preload-data="hover">JFET</a>
-        <a href="/chart" class="btn" data-sveltekit-preload-data="hover">
+        <a href="/charts" class="btn" data-sveltekit-preload-data="hover">
           Charts
         </a>
       </svelte:fragment>
@@ -97,6 +97,9 @@
     </AppBar>
   </svelte:fragment>
   <main class="h-screen w-screen overflow-auto border bg-gray-100">
+    <div class="p-2 pb-0 bg-purple-100">
+      <Graphs {Vp} {Iss} {Vds_max} {Vgs_max} {span}></Graphs>
+    </div>
     <Values
       bind:Vgs={voltageSources[0].value}
       bind:Id
@@ -106,9 +109,7 @@
       Vth={Vp}
       Vgs_prime={voltageSources[0].max}
     ></Values>
-    <div class="p-2 pb-0 bg-purple-100">
-      <Graphs {Vp} {Iss} {Vds_max} {Vgs_max} {span}></Graphs>
-    </div>
+    
 
     <!-- <Animation trens={$trainsStore} /> -->
     <div class="flex items-center justify-center bg-purple-100 p-3 py-1">

@@ -55,36 +55,36 @@
   }
 </script>
 
-<main class="flex flex-col items-center p-8 space-y-0 card">
-  <h1 class="text-2xl font-semibold">
+<main class="flex flex-col items-center p-8 py-4 card">
+  <!-- <h1 class="text-2xl font-semibold">
     Cálculo da Corrente Id em MOSFET de Depleção
-  </h1>
+  </h1> -->
   <!-- {Vds < Vgs - Vth} {Vgs - Vth} -->
   <!-- Inputs para Vgs e Vds -->
-  <div class="flex flex-col items-center space-y-0">
+  <div class="flex  items-center gap-2">
     <!-- <div>
-      <label for="vgs-slider" class="text-lg">Vgs': {Vgs_prime} V</label>
+      <label for="vgs-slider" class="text-lg">V<sub>pinchoff</sub>: {Vgs-Vp} V</label>
+    </div> -->
+
+    <div>
+      <label for="vgs-slider" class="text-lg">Vgs: {Vgs.toFixed(2)}V</label>
     </div>
 
     <div>
-      <label for="vgs-slider" class="text-lg">Vgs: {Vgs.toFixed(2)} V</label>
+      <label for="Vds-slider" class="text-lg">Vds: {Vds.toFixed(2)}V</label>
     </div>
 
     <div>
-      <label for="Vds-slider" class="text-lg">Vds: {Vds.toFixed(2)} V</label>
+      <label for="Vds-slider" class="text-lg">Vp: {Vth.toFixed(2)}V</label>
     </div>
-
-    <div>
-      <label for="Vds-slider" class="text-lg">Vp: {Vth.toFixed(2)} V</label>
-    </div>
-    <div>
+    <!-- <div>
       <label for="Vds-slider" class="text-lg">K: {K.toFixed(2)} V</label>
-    </div>
-  </div> -->
+    </div> -->
+  </div>
 
     <!-- Exibição da Corrente Id -->
     <div class="mt-6">
       <p class="text-xl">Corrente Id: {Id.toFixed(4)} mA</p>
     </div>
-  </div>
+  <!-- </div> -->
 </main>
