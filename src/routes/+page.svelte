@@ -104,7 +104,7 @@
       Vth={Vp}
       Vgs_prime={voltageSources[0].max}
     ></Values>
-    <div>
+    <div class="p-2 pb-0 bg-purple-100">
       <Graphs {Vp} {Iss} {Vds_max} {Vgs_max} {span}></Graphs>
     </div>
    
