@@ -37,7 +37,7 @@ export function generateIdsData(
   const data = {
     labels,
     datasets: Ids.map((_data, i) => ({
-      label: `Vgs(${i + Vp}) -> Id`, // Rótulo do dataset
+      label: `Vgs(${i + Vp}V) -> Id`, // Rótulo do dataset
       fill: true,
       lineTension: 0.3,
       backgroundColor: "rgba(225, 204,230, .3)",

@@ -45,14 +45,14 @@
         display: true, // Exibe o eixo X
         title: {
           display: true,
-          text: "Vds", // Título do eixo X
+          text: "Vds (V)", // Título do eixo X
         },
       },
       y: {
         display: true, // Exibe o eixo Y
         title: {
           display: true,
-          text: "Id", // Título do eixo Y
+          text: "Id (mA)", // Título do eixo Y
         },
       },
     },
