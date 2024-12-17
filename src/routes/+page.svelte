@@ -1,10 +1,5 @@
 <script lang="ts">
   import { LightSwitch } from "@skeletonlabs/skeleton";
-  import {
-    startTrains,
-    //updateTrainVoltage,
-    stopTrains,
-  } from "$lib/train";
   import { AppBar, AppShell, RangeSlider } from "@skeletonlabs/skeleton";
   import Channel from "$lib/Channel.svelte";
   import Values from "$lib/Values.svelte";
@@ -20,8 +15,8 @@
   const nChannelColor = "bg-blue-500";
   const pChannelColor = "bg-rose-500";
 
-  const chargeUrl =
-    "https://raw.githubusercontent.com/AulaZero/icons/refs/heads/main/icons/plus.svg";
+  // const chargeUrl =
+  //   "https://raw.githubusercontent.com/AulaZero/icons/refs/heads/main/icons/plus.svg";
 
   const step = 0.5;
 
@@ -31,16 +26,16 @@
   let span: number = 2;
 
   let Vp = -4;
-  let Id: number = 1;
+  let Id: number = 0;
   let Iss: number = 7;
-  let K: number = 0.5;
-  // let Vgs: number;
-  // let Vds: number;
+  //let K: number = 0.5;
+  let Vgs_chart: number;
+  let Vds_chart: number;
   let Vds_max: number = 9;
   let Vgs_max: number = 6;
 
   const voltageSources = [
-    { name: "Vgs", value: 0, color: "bg-pink-500", min: Vp - 1, max: Vgs_max },
+    { name: "Vgs", value: 0, color: "bg-pink-500", min: Vp - 2, max: Vgs_max },
     {
       name: "Vds",
       value: 0,
@@ -55,21 +50,11 @@
     //updateTrainVoltage(trainNumber, newVoltage);
   }
 
-  const start = () => {
-    startTrains();
-  };
-
-  const stop = () => {
-    stopTrains();
-  };
-
-  function reloadPage() {
-    window.location.reload();
-  }
-
   $: {
     isOn = Id > 0;
     speed = 4 / Id;
+    Vgs_chart = voltageSources[0].value - Vp + span;
+    Vds_chart = voltageSources[1].value;
   }
 </script>
 
@@ -98,18 +83,24 @@
   </svelte:fragment>
   <main class="h-screen w-screen overflow-auto border bg-gray-100">
     <div class="p-2 pb-0 bg-purple-100">
-      <Graphs {Vp} {Iss} {Vds_max} {Vgs_max} {span}></Graphs>
+      <Graphs
+        bind:Vgs={Vgs_chart}
+        Vds={Vds_chart}
+        {Vp}
+        {Iss}
+        {Vds_max}
+        {Vgs_max}
+        {span}
+        {Id}
+      ></Graphs>
     </div>
     <Values
       bind:Vgs={voltageSources[0].value}
       bind:Id
-      {K}
       {Iss}
       Vds={voltageSources[1].value}
       Vth={Vp}
-      Vgs_prime={voltageSources[0].max}
     ></Values>
-    
 
     <!-- <Animation trens={$trainsStore} /> -->
     <div class="flex items-center justify-center bg-purple-100 p-3 py-1">
@@ -157,7 +148,8 @@
       </div>
       <RightWire {isOn} {speed} />
     </div>
-
+  </main>
+  <svelte:fragment slot="footer">
     <div
       class="flex flex-col md:flex-row justify-center items-center gap-2 p-2 border"
     >
@@ -180,5 +172,5 @@
         </div>
       {/each}
     </div>
-  </main>
+  </svelte:fragment>
 </AppShell>

@@ -13,7 +13,7 @@ export function generateIdsData(
   const Ids: number[][] = Array.from({ length: numVds }, () =>
     Array(numVds).fill(0)
   );
-  console.log(numVds);
+
   let z = 0; // Usado para controlar a iteração de Vgs
 
   // Loop para gerar os valores de Ids
@@ -41,18 +41,18 @@ export function generateIdsData(
       fill: true,
       lineTension: 0.3,
       backgroundColor: "rgba(225, 204,230, .3)",
-      borderColor: "rgb(205, 130, 158)",
+      borderColor: "rgb(6, 29, 49)",
       borderCapStyle: "butt",
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: "miter",
-      pointBorderColor: "rgb(205, 130,158)",
-      pointBackgroundColor: "rgb(255, 255, 255)",
-      pointBorderWidth: 3,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgb(0, 0, 0)",
-      pointHoverBorderColor: "rgba(220, 220, 220,1)",
-      pointHoverBorderWidth: 2,
+      pointBorderColor: "rgb(6, 29, 49)",
+      pointBackgroundColor: "rgb(55, 255, 55)",
+      pointBorderWidth: 4,
+      pointHoverRadius: 15,
+      pointHoverBackgroundColor: "rgb(253, 220, 0)",
+      pointHoverBorderColor: "rgba(3, 0, 0,1)",
+      pointHoverBorderWidth: 8,
       pointRadius: 1,
       pointHitRadius: 10,
       data: _data,

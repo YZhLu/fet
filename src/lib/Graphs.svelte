@@ -8,14 +8,17 @@
   export let Vds_max: number; // = 10;
   export let span: number; // = 0;
   export let Vgs_max: number; // = 3;
-  export let shift: number = Vp - span;
+  export let Vgs: number;
+  export let Vds: number;
+  //export let shift: number = Vp - span;
+  export let Id: number;
 </script>
 
 <div class="overflow-auto flex w-full h-full flex-col md:flex-row">
   <div class="p-3 bg-gray-100 h-full w-full md:w-1/2">
-    <VGS {Vgs_max} {Vp} {Iss} {shift} />
+    <VGS {Vgs} {Vgs_max} {Vp} {Iss} {Id} {span}/>
   </div>
   <div class="p-3 bg-gray-100 h-full w-full md:w-1/2">
-    <VDS {Iss} {Vp} {Vds_max} {span} {Vgs_max} />
+    <VDS {Vds} {Iss} {Vp} {Vds_max} {span} {Vgs_max} {Id} />
   </div>
 </div>

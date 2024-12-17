@@ -32,13 +32,21 @@
 
   export let Iss: number; // = 7;
   export let Vp: number; // = -4;
-  export let shift: number; // = 0;
   export let Vgs_max: number; // = 3;
+  export let Vgs: number;
+  export let Id: number;
+  export let span: number;
+  export let shift: number = Vp - span;
 
   let xMin = -shift; //(-1)*data.shift;
   let xMax = -shift; //(-1)*data.shift,
 
-  const data = generateVgsIdData(Iss, Vp, shift, Vgs_max);
+  let data = generateVgsIdData(Iss, Vp, Vgs_max, span);
+  $: {
+    xMin = -Vp + span; //(-1)*data.shift;
+    xMax = -Vp + span; //(-1)*data.shift,
+    data = generateVgsIdData(Iss, Vp, Vgs_max, span);
+  }
 </script>
 
 <Line
@@ -70,8 +78,22 @@
             type: "line",
             xMin,
             xMax,
-            borderColor: "rgb(05, 09, 02)",
-            borderWidth: 2,
+            borderColor: "rgb(155, 159, 152)",
+            borderWidth: 3,
+          },
+          line2: {
+            type: "line",
+            xMin: Vgs,
+            xMax: Vgs,
+            borderColor: "rgb(236, 72, 153)",
+            borderWidth: 5,
+          },
+          line3: {
+            type: "line",
+            yMin: Id,
+            yMax: Id,
+            borderColor: "rgb(245, 158, 11)",
+            borderWidth: 5,
           },
         },
       },

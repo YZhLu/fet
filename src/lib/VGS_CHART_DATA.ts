@@ -1,15 +1,16 @@
 export function generateVgsIdData(
   Iss: number,
   Vp: number,
-  shift: number,
-  Vgs_max: number
+  Vgs_max: number,
+  span: number
 ) {
+  const shift: number = Vp - span;
   const max = Vgs_max - shift + 1;
   // Inicializando o array de Ids com o valor inicial 0
   const Ids: number[] = Array(max).fill(0);
 
   // Preenchendo o array de Ids com os cálculos necessários
-  for (let i = 2; i < max; i++) {
+  for (let i = span; i < max; i++) {
     Ids[i] = Iss * (1 - (i + shift) / Vp) ** 2;
   }
 
@@ -25,18 +26,18 @@ export function generateVgsIdData(
         fill: true,
         lineTension: 0.3,
         backgroundColor: "rgba(225, 204,230, .3)",
-        borderColor: "rgb(205, 130, 158)",
+        borderColor: "rgb(6, 29, 49)",
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: "miter",
-        pointBorderColor: "rgb(205, 130,158)",
-        pointBackgroundColor: "rgb(255, 255, 255)",
-        pointBorderWidth: 3,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgb(0, 0, 0)",
-        pointHoverBorderColor: "rgba(220, 220, 220,1)",
-        pointHoverBorderWidth: 2,
+        pointBorderColor: "rgb(6, 29, 19)",
+        pointBackgroundColor: "rgb(253, 220, 0)",
+        pointBorderWidth: 4,
+        pointHoverRadius: 15,
+        pointHoverBackgroundColor: "rgb(253, 220, 0)",
+        pointHoverBorderColor: "rgba(0, 0, 0,1)",
+        pointHoverBorderWidth: 8,
         pointRadius: 1,
         pointHitRadius: 10,
         data: Ids,

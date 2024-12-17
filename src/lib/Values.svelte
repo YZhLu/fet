@@ -3,27 +3,11 @@
   export let Vds: number; //= 0; // Tensão de dreno-fonte
   export let Id: number; //= 0; // Corrente de dreno
   export let Vth: number; //= 1; // Tensão de limiar (exemplo, pode ajustar conforme o MOSFET)
-  export let K: number; //= 0.5; // Constante do MOSFET (exemplo, pode ajustar conforme o MOSFET)
-  export let Vgs_prime: number;
+  // export let K: number; //= 0.5; // Constante do MOSFET (exemplo, pode ajustar conforme o MOSFET)
+  // export let Vgs_prime: number;
   export let Iss: number;
   export let Vp: number = Vth;
 
-  // Função para calcular a corrente Id com base nas tensões Vgs e Vds
-  // function calcularId() {
-  //   console.log(Vgs, Id, Vds, Vgs < Vth);
-  //   if (Vgs < Vth || Vds == 0) {
-  //     Id = 0; // Se Vgs for menor que Vth, o MOSFET está "desligado"
-  //   } else {
-  //     if (Vds < Vgs - Vth) {
-  //       // Modo linear (ou triode)
-  //       //Id = K * ((Vgs - Vth) * Vds - Vds ** 2 / 2);
-  //       Id = Iss * (1 - Vgs / Vth) ** 2;
-  //     } else {
-  //       // Modo de saturação
-  //       Id = (K / 2) * (Vgs - Vth) ** 2;
-  //     }
-  //   }
-  // }
 
   export function calculateId(
     Iss: number,
@@ -56,12 +40,12 @@
 </script>
 
 <main class="flex flex-col items-center p-8 py-4 card">
-  <!-- <h1 class="text-2xl font-semibold">
-    Cálculo da Corrente Id em MOSFET de Depleção
-  </h1> -->
+  <h1 class="text-2xl font-semibold">
+    MOSFET de Depleção
+  </h1>
   <!-- {Vds < Vgs - Vth} {Vgs - Vth} -->
   <!-- Inputs para Vgs e Vds -->
-  <div class="flex  items-center gap-2">
+  <div class="flex  items-center gap-2 py-2">
     <!-- <div>
       <label for="vgs-slider" class="text-lg">V<sub>pinchoff</sub>: {Vgs-Vp} V</label>
     </div> -->
@@ -83,7 +67,7 @@
   </div>
 
     <!-- Exibição da Corrente Id -->
-    <div class="mt-6">
+    <div class="pt-1">
       <p class="text-xl">Corrente Id: {Id.toFixed(4)} mA</p>
     </div>
   <!-- </div> -->
