@@ -135,6 +135,7 @@
               type="number"
               placeholder="Input"
               bind:value={Vgs}
+              min={Vp-span}
             />
           </label>
           <label class="label flex items-center p-4 gap-2 w-36">
@@ -144,6 +145,7 @@
               type="number"
               placeholder="Input"
               bind:value={Vds}
+              min={0}
             />
           </label>
           <div class="pt-1 flex items-center">
