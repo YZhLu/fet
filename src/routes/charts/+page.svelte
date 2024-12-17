@@ -28,7 +28,6 @@
   let Vds_max: number = 9;
   let Vgs_max: number = 6;
 
-
   $: {
     isOn = Id > 0;
     speed = 4 / Id;
@@ -75,71 +74,98 @@
     </AppBar>
   </svelte:fragment>
   <main class="h-full w-screen overflow-auto border bg-gray-100">
-    <div class="p-2 pb-0 bg-purple-100 ">
-      <Graphs
-        Vgs={Vgs_chart}
-        Vds={Vds_chart}
-        {Vp}
-        {Iss}
-        {Vds_max}
-        {Vgs_max}
-        {span}
-        {Id}
-      ></Graphs>
-    </div>
-    <div class="card flex gap-2">
-      <label class="label flex items-center p-4 gap-2 w-36">
-        <span>span:</span>
-        <input
-          class="input"
-          type="number"
-          placeholder="Input"
-          bind:value={span}
-          min={0}
-        />
-      </label>
-      <label class="label flex items-center p-4 gap-2 w-36">
-        <span>Iss:</span>
-        <input
-          class="input"
-          type="number"
-          placeholder="Input"
-          bind:value={Iss}
-        />
-      </label>
-      <label class="label flex items-center p-4 gap-2 w-36">
-        <span>VP:</span>
-        <input
-          class="input"
-          type="number"
-          placeholder="Input"
-          bind:value={Vp}
-        />
-      </label>
-      <label class="label flex items-center p-4 gap-2 w-36">
-        <span>Vgs Max:</span>
-        <input
-          class="input"
-          type="number"
-          placeholder="Input"
-          bind:value={Vgs_max}
-          min={0}
-          max={Vds_max + 1}
-        />
-      </label>
-      <label class="label flex items-center p-4 gap-2 w-36">
-        <span>Vds Max:</span>
-        <input
-          class="input"
-          type="number"
-          placeholder="Input"
-          bind:value={Vds_max}
-          min={Math.max(Vgs_max - 1, 1)}
-        />
-      </label>
+    <div class="grid grid-rows-[auto_1fr]">
+      <div>
+        <Values {Vgs} bind:Id {Iss} {Vds} Vth={Vp} visible={false}></Values>
+
+        <div class="card flex gap-2">
+          <label class="label flex items-center p-4 gap-2 w-36">
+            <span>span:</span>
+            <input
+              class="input"
+              type="number"
+              placeholder="Input"
+              bind:value={span}
+              min={0}
+            />
+          </label>
+          <label class="label flex items-center p-4 gap-2 w-36">
+            <span>Iss:</span>
+            <input
+              class="input"
+              type="number"
+              placeholder="Input"
+              bind:value={Iss}
+            />
+          </label>
+          <label class="label flex items-center p-4 gap-2 w-36">
+            <span>VP:</span>
+            <input
+              class="input"
+              type="number"
+              placeholder="Input"
+              bind:value={Vp}
+            />
+          </label>
+          <label class="label flex items-center p-4 gap-2 w-36">
+            <span>Vgs Max:</span>
+            <input
+              class="input"
+              type="number"
+              placeholder="Input"
+              bind:value={Vgs_max}
+              min={0}
+              max={Vds_max + 1}
+            />
+          </label>
+          <label class="label flex items-center p-4 gap-2 w-36">
+            <span>Vds Max:</span>
+            <input
+              class="input"
+              type="number"
+              placeholder="Input"
+              bind:value={Vds_max}
+              min={Math.max(Vgs_max - 1, 1)}
+            />
+          </label>
+          <label class="label flex items-center p-4 gap-2 w-36">
+            <span>Vgs:</span>
+            <input
+              class="input"
+              type="number"
+              placeholder="Input"
+              bind:value={Vgs}
+            />
+          </label>
+          <label class="label flex items-center p-4 gap-2 w-36">
+            <span>Vds:</span>
+            <input
+              class="input"
+              type="number"
+              placeholder="Input"
+              bind:value={Vds}
+            />
+          </label>
+          <div class="pt-1 flex items-center">
+            <p class="text-xl">Corrente Id: {Id.toFixed(4)} mA</p>
+          </div>
+        </div>
+      </div>
+      <div class="p-2 pb-0 bg-purple-100 h-96">
+        <Graphs
+          Vgs={Vgs_chart}
+          Vds={Vds_chart}
+          {Vp}
+          {Iss}
+          {Vds_max}
+          {Vgs_max}
+          {span}
+          {Id}
+        ></Graphs>
+      </div>
     </div>
 
-    <Values {Vgs} bind:Id {Iss} {Vds} Vth={Vp}></Values>
+    <!-- <Values {Vgs} bind:Id {Iss} {Vds} Vth={Vp}></Values> -->
   </main>
   <svelte:fragment slot="footer">
     <div

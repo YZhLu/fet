@@ -7,7 +7,7 @@
   // export let Vgs_prime: number;
   export let Iss: number;
   export let Vp: number = Vth;
-
+  export let visible: boolean = true;
 
   export function calculateId(
     Iss: number,
@@ -40,35 +40,36 @@
 </script>
 
 <main class="flex flex-col items-center p-8 py-4 card">
-  <h1 class="text-2xl font-semibold">
-    MOSFET de Depleção
-  </h1>
+  <h1 class="text-2xl font-semibold">MOSFET de Depleção</h1>
   <!-- {Vds < Vgs - Vth} {Vgs - Vth} -->
   <!-- Inputs para Vgs e Vds -->
-  <div class="flex  items-center gap-2 py-2">
-    <!-- <div>
+  {#if visible}
+    <div class="flex items-center gap-2 py-2">
+      <!-- <div>
       <label for="vgs-slider" class="text-lg">V<sub>pinchoff</sub>: {Vgs-Vp} V</label>
     </div> -->
 
-    <div>
-      <label for="vgs-slider" class="text-lg">Vgs: {Vgs.toFixed(2)}V</label>
-    </div>
+      <div>
+        <label for="vgs-slider" class="text-lg">Vgs: {Vgs.toFixed(2)}V</label>
+      </div>
 
-    <div>
-      <label for="Vds-slider" class="text-lg">Vds: {Vds.toFixed(2)}V</label>
-    </div>
+      <div>
+        <label for="Vds-slider" class="text-lg">Vds: {Vds.toFixed(2)}V</label>
+      </div>
 
-    <div>
-      <label for="Vds-slider" class="text-lg">Vp: {Vth.toFixed(2)}V</label>
-    </div>
-    <!-- <div>
+      <div>
+        <label for="Vds-slider" class="text-lg">Vp: {Vth.toFixed(2)}V</label>
+      </div>
+
+      <!-- <div>
       <label for="Vds-slider" class="text-lg">K: {K.toFixed(2)} V</label>
     </div> -->
-  </div>
+    </div>
 
     <!-- Exibição da Corrente Id -->
     <div class="pt-1">
       <p class="text-xl">Corrente Id: {Id.toFixed(4)} mA</p>
     </div>
+  {/if}
   <!-- </div> -->
 </main>
