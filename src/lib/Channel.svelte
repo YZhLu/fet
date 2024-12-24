@@ -12,9 +12,14 @@
   export let channelColor = "bg-green-500";
   export let substrateColor = "bg-rose-500";
 
+  export let Vds: number;
+  export let Vds_max: number;
+
+  let pinchoff = 0;
   let strangle = 0;
   // Função para calcular o aumento do canal com base em Vgs
   $: {
+    pinchoff = Math.round(((50 * Vds) / Vds_max) * ((Vgs - Vp) / (vmax - Vp)));
     if (Vgs <= 0) {
       strangle = (100 * Vgs) / Vp;
       channelHeight = Vp * -10;
@@ -42,7 +47,7 @@
       class:items-start={strangle >= 90}
       style="height: {strangle}%;"
     ></div>
-
+    <!-- {Vds_max}-{pinchoff} -->
     {#if Vgs > Vp}
       <div class="flex items-center h-full">
         <div class="w-full h-4 overflow-hidden">
@@ -53,6 +58,10 @@
           ></div>
         </div>
       </div>
+      <div
+        style="border-bottom: {pinchoff}px solid indigo;"
+        class="self-end w-0 h-0 border-l-[200px] border-r-0 border-l-transparent border-r-transparent border-b-indigo-900"
+      />
     {/if}
   </div>
 </div>

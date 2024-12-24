@@ -131,6 +131,8 @@
               substrateColor={pChannelColor}
               bind:Vgs={voltageSources[0].value}
               {Vp}
+              Vds_max={voltageSources[1].max}
+              bind:Vds={voltageSources[1].value}
               {isOn}
               vmax={voltageSources[0].max}
               {speed}
